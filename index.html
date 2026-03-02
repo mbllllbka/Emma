@@ -4,14 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Точка входа — Онлайн-выставка</title>
+
 <style>
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0e0e0e;
+    background: linear-gradient(270deg, #ff4e50, #f9d423, #24c6dc, #514a9d);
+    background-size: 800% 800%;
+    animation: gradientAnimation 25s ease infinite;
     color: white;
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
 }
+
+@keyframes gradientAnimation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
 section {
     padding: 100px 20px;
     max-width: 900px;
@@ -19,17 +45,34 @@ section {
     opacity: 0;
     transform: translateY(40px);
     transition: 0.8s ease;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
+
 section.visible {
     opacity: 1;
     transform: translateY(0);
 }
+
 h1, h2 {
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
 .center {
     text-align: center;
 }
+
 .button {
     display: inline-block;
     margin: 15px;
@@ -42,37 +85,59 @@ h1, h2 {
     transition: 0.3s;
     cursor: pointer;
     border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+
 .button:hover {
     background: #bdbdbd;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
+
 .card {
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 0.9);
     padding: 20px;
     margin: 30px 0;
     border-radius: 15px;
     transition: 0.3s;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .card:hover {
     transform: scale(1.02);
+    background: rgba(40, 40, 40, 0.9);
+    border-color: rgba(255, 255, 255, 0.3);
 }
+
 .card img {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
 .hidden {
     display: none;
 }
+
 input {
     padding: 12px;
     width: 80%;
     margin: 10px 0;
     border-radius: 10px;
     border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
 }
 </style>
 </head>
+
 <body>
 
 <section class="visible">
@@ -81,6 +146,7 @@ input {
         Онлайн-выставка студенческих работ<br>
         Проживи путь будущего студента
     </p>
+
     <div class="center">
         <button class="button" onclick="showPath('student')">Я абитуриент</button>
         <button class="button" onclick="showPath('parent')">Я родитель</button>
@@ -99,8 +165,9 @@ input {
     <p class="center">
         Большинство студентов поступают без идеального портфолио.
     </p>
+
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format" alt="Первый медиапроект">
         <h3>Первый медиапроект</h3>
         <p>Освоение композиции, базового монтажа и работы с идеей.</p>
     </div>
@@ -109,7 +176,7 @@ input {
 <section>
     <h2>2. Проба</h2>
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800">
+        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format" alt="Backstage съёмок">
         <h3>Backstage съёмок</h3>
         <p>Практика, командная работа, продакшн-процесс.</p>
     </div>
@@ -118,7 +185,7 @@ input {
 <section>
     <h2>3. Реальный проект</h2>
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800">
+        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&auto=format" alt="Командный кейс">
         <h3>Командный кейс</h3>
         <p>
             Задача: работа по брифу.<br>
@@ -131,7 +198,7 @@ input {
 <section>
     <h2>4. Результат</h2>
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=800">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=800&auto=format" alt="Финальная работа">
         <h3>Финальная работа</h3>
         <p>Готовый проект, демонстрирующий профессиональный уровень.</p>
     </div>
@@ -151,17 +218,22 @@ input {
 </section>
 
 <script>
+
 function showPath(type) {
     const intro = document.getElementById("intro");
     const introText = document.getElementById("introText");
+    
     intro.classList.remove("hidden");
+    
     if (type === "student") {
         introText.innerText = "Ты выбираешь профессию. Посмотри, каким может быть твой путь.";
     } else {
         introText.innerText = "Вы выбираете будущее ребёнка. Посмотрите, какие навыки он получит.";
     }
+    
     intro.scrollIntoView({ behavior: "smooth" });
 }
+
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -174,6 +246,56 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
+
+function createParticles() {
+    const particlesContainer = document.body;
+    const numberOfParticles = 30;
+    
+    for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+
+        const size = Math.random() * 8 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+        const duration = Math.random() * 100 + 50;
+        const delay = Math.random() * 50;
+        particle.style.animation = `float ${duration}s ${delay}s infinite`;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+const style = document.createElement('style');
+style.textContent = `
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-30px) translateX(15px);
+    }
+    50% {
+        transform: translateY(-50px) translateX(-15px);
+    }
+    75% {
+        transform: translateY(-30px) translateX(10px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+`;
+document.head.appendChild(style);
+
+window.addEventListener('load', createParticles);
 </script>
+
 </body>
 </html>
