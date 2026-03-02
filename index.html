@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Точка входа — Онлайн-выставка</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0e0e0e;
+    color: white;
+    scroll-behavior: smooth;
+}
+section {
+    padding: 100px 20px;
+    max-width: 900px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+}
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+h1, h2 {
+    text-align: center;
+}
+.center {
+    text-align: center;
+}
+.button {
+    display: inline-block;
+    margin: 15px;
+    padding: 14px 28px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+}
+.button:hover {
+    background: #bdbdbd;
+}
+.card {
+    background: #1a1a1a;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+.card:hover {
+    transform: scale(1.02);
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.hidden {
+    display: none;
+}
+input {
+    padding: 12px;
+    width: 80%;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+}
+</style>
+</head>
+<body>
+
+<section class="visible">
+    <h1>Точка входа</h1>
+    <p class="center">
+        Онлайн-выставка студенческих работ<br>
+        Проживи путь будущего студента
+    </p>
+    <div class="center">
+        <button class="button" onclick="showPath('student')">Я абитуриент</button>
+        <button class="button" onclick="showPath('parent')">Я родитель</button>
+    </div>
+</section>
+
+<section id="intro" class="hidden">
+    <h2 id="introText"></h2>
+    <div class="center">
+        <a href="#stage1" class="button">Начать путь</a>
+    </div>
+</section>
+
+<section id="stage1">
+    <h2>1. Сомнение</h2>
+    <p class="center">
+        Большинство студентов поступают без идеального портфолио.
+    </p>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800">
+        <h3>Первый медиапроект</h3>
+        <p>Освоение композиции, базового монтажа и работы с идеей.</p>
+    </div>
+</section>
+
+<section>
+    <h2>2. Проба</h2>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800">
+        <h3>Backstage съёмок</h3>
+        <p>Практика, командная работа, продакшн-процесс.</p>
+    </div>
+</section>
+
+<section>
+    <h2>3. Реальный проект</h2>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800">
+        <h3>Командный кейс</h3>
+        <p>
+            Задача: работа по брифу.<br>
+            Решение: концепция + съёмка + монтаж.<br>
+            Результат: готовый медиапродукт.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>4. Результат</h2>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=800">
+        <h3>Финальная работа</h3>
+        <p>Готовый проект, демонстрирующий профессиональный уровень.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Сделать первый шаг</h2>
+    <div class="center">
+        <input type="text" placeholder="Ваше имя">
+        <br>
+        <input type="email" placeholder="Ваш email">
+        <br>
+        <button class="button" onclick="alert('Спасибо! Мы свяжемся с вами.')">
+            Получить информацию о поступлении
+        </button>
+    </div>
+</section>
+
+<script>
+function showPath(type) {
+    const intro = document.getElementById("intro");
+    const introText = document.getElementById("introText");
+    intro.classList.remove("hidden");
+    if (type === "student") {
+        introText.innerText = "Ты выбираешь профессию. Посмотри, каким может быть твой путь.";
+    } else {
+        introText.innerText = "Вы выбираете будущее ребёнка. Посмотрите, какие навыки он получит.";
+    }
+    intro.scrollIntoView({ behavior: "smooth" });
+}
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
+</script>
+</body>
+</html>
